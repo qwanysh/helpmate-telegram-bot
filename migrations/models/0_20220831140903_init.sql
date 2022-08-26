@@ -1,0 +1,18 @@
+-- upgrade --
+CREATE TABLE IF NOT EXISTS "categories" (
+    "id" UUID NOT NULL  PRIMARY KEY,
+    "name" VARCHAR(100) NOT NULL,
+    "created_at" TIMESTAMPTZ NOT NULL  DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS "spendings" (
+    "id" UUID NOT NULL  PRIMARY KEY,
+    "amount" INT NOT NULL,
+    "created_at" TIMESTAMPTZ NOT NULL  DEFAULT CURRENT_TIMESTAMP,
+    "category_id" UUID NOT NULL REFERENCES "categories" ("id") ON DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS "aerich" (
+    "id" SERIAL NOT NULL PRIMARY KEY,
+    "version" VARCHAR(255) NOT NULL,
+    "app" VARCHAR(100) NOT NULL,
+    "content" JSONB NOT NULL
+);

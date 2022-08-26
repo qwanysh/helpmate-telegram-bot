@@ -1,0 +1,28 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+python-dotenv = "*"
+python-telegram-bot = "*"
+tortoise-orm = "*"
+aerich = "*"
+asyncpg = "*"
+jinja2 = "*"
+
+[dev-packages]
+flake8-import-order = "*"
+flake8-multiline-containers = "*"
+flake8-commas = "*"
+flake8-quotes = "*"
+pytest = "*"
+pytest-flake8 = "*"
+flake8 = "<5"
+hupper = "*"
+
+[requires]
+python_version = "3.9"
+
+[pipenv]
+allow_prereleases = true
