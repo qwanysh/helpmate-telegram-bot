@@ -8,7 +8,7 @@ WEBHOOK_URL_TEMPLATE = 'https://{}.herokuapp.com/{}'
 
 logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s',
-    level=logging.DEBUG,
+    level=logging.INFO if HEROKU_APP_NAME else logging.DEBUG,
 )
 
 
