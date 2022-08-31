@@ -1,0 +1,9 @@
+{% if spendings %}
+{% for spending in spendings %}
+{{ spending.category__name|capitalize }}: <b>{{ spending.total }}</b>
+{% endfor %}
+
+Total: {{ total_amount }}
+{% else %}
+No spendings yet
+{% endif %}

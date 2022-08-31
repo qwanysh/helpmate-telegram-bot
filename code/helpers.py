@@ -12,6 +12,8 @@ def connect_database():
     ))
 
 
-def render(template_name, **kwargs):
+async def reply_rendered_text(update, template_name, **kwargs):
     template = jinja2_env.get_template(f'{template_name}.html')
-    return template.render(**kwargs)
+    await update.message.reply_text(
+        template.render(**kwargs), parse_mode='html',
+    )

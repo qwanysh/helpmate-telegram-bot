@@ -1,7 +1,11 @@
 from functools import wraps
+from logging import getLogger
 
 from .config import MY_TELEGRAM_ID
 from .exceptions import MessageError
+
+
+logger = getLogger()
 
 
 def handle_errors(func):
@@ -11,7 +15,8 @@ def handle_errors(func):
             await func(update, context)
         except MessageError as error:
             await update.message.reply_text(error.message)
-        except Exception:
+        except Exception as error:
+            logger.exception(error)
             await update.message.reply_text('Something went wrong')
 
     return wrapper

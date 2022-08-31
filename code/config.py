@@ -29,5 +29,5 @@ jinja2_env = jinja2.Environment(
     loader=jinja2.PackageLoader(
         package_name='templates', package_path='../templates',
     ),
-    trim_blocks=True,
+    trim_blocks=True, lstrip_blocks=True,
 )
