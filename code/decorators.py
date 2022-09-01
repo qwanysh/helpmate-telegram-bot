@@ -4,7 +4,6 @@ from logging import getLogger
 from .config import MY_TELEGRAM_ID
 from .exceptions import MessageError
 
-
 logger = getLogger()
 
 
