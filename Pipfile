@@ -5,11 +5,11 @@ name = "pypi"
 
 [packages]
 python-dotenv = "*"
-python-telegram-bot = "*"
 tortoise-orm = "*"
 aerich = "*"
 asyncpg = "*"
 jinja2 = "*"
+python-telegram-bot = "*"
 
 [dev-packages]
 flake8-import-order = "*"
