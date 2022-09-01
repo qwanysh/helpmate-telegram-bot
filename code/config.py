@@ -1,9 +1,12 @@
 import os
+import pathlib
 
 from dotenv import load_dotenv
 import jinja2
 
 load_dotenv()
+
+BASE_DIR = pathlib.Path()
 
 TOKEN = os.getenv('TOKEN')
 
@@ -26,8 +29,6 @@ TORTOISE_ORM = {
 }
 
 jinja2_env = jinja2.Environment(
-    loader=jinja2.PackageLoader(
-        package_name='templates', package_path='../templates',
-    ),
+    loader=jinja2.FileSystemLoader(BASE_DIR / 'templates'),
     trim_blocks=True, lstrip_blocks=True,
 )
