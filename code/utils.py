@@ -3,23 +3,28 @@ import re
 
 from tortoise.functions import Sum
 
-from .exceptions import SpendingParseError
+from .exceptions import SpendingAmountError, SpendingFormatError
 from .models import Category, Spending
 
 
 def parse_spending(text):
     if not re.match(r'^/spend ([\d]+) ', text):
-        raise SpendingParseError
+        raise SpendingFormatError
 
     _, amount, category_name = text.split(maxsplit=2)
+    amount = int(amount)
+
+    if amount <= 0:
+        raise SpendingAmountError
+
     return {
-        'amount': int(amount),
+        'amount': amount,
         'category_name': category_name,
     }
 
 
 async def create_spending(amount, category_name):
-    category = await _get_or_create_category(category_name)
+    category, _ = await Category.get_or_create(name=category_name)
     return await Spending.create(category=category, amount=amount)
 
 
@@ -36,8 +41,3 @@ async def get_today_spendings_by_categories():
         .order_by('-total')
         .values('category__name', 'total')
     )
-
-
-async def _get_or_create_category(category_name):
-    category, _ = await Category.get_or_create(name=category_name)
-    return category
